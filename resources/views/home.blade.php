@@ -11,6 +11,28 @@
             @csrf
             <button>Logout</button>
         </form>
+        <div style="border:3px solid black">
+            <h2>Create a New Post</h2>
+            <form action="/create-post" method="POST">
+                @csrf
+                <input type="text" name="title" placeholder="post title">
+                <textarea name="body" placeholder="Type something..."></textarea>
+                <button>Save Post</button>
+            </form>
+        </div>
+        <div style="background: grey">
+            <h2> All Posts</h2>
+            @foreach($posts as $post)
+                <h3>{{$post->title}}</h3>
+                <p>{{$post->body}}</p>P
+                <p><a href="edit-post/{{$post->id}}">Edit</a></p>
+                <form action="/delete-post/{{$post->id}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button>Delete</button>
+                </form>
+        </div>
+            @endforeach
     @else
     <div style="border: 3px solid black">
     <h2>Register</h2>
